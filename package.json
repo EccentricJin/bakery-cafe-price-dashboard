@@ -1,0 +1,13 @@
+{
+  "name": "bakery-cafe-price-dashboard",
+  "version": "1.0.0",
+  "description": "빵집/카페 사장님을 위한 원자재 가격 대시보드",
+  "type": "module",
+  "scripts": {
+    "start": "npx tsx bakery-cafe-price-dashboard.ts"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3",
+    "tsx": "^4.21.0"
+  }
+}
