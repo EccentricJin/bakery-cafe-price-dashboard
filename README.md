@@ -35,6 +35,9 @@ npx tsx validate-prediction-model.ts
 
 # 원자재 트렌드 통합 리포트 (네이버+구글+YouTube API)
 npx tsx bakery-ingredient-trend-report.ts
+
+# 원자재 뉴스 수집 → EC2 서버 전송
+npx tsx sync-news-to-ec2.ts
 ```
 
 ## 포함 기능
@@ -97,6 +100,15 @@ npx tsx bakery-ingredient-trend-report.ts
 - 알림 서비스용 JSON 출력 (`--- TREND_JSON_START/END ---`)
 
 > 📌 `.env` 파일에 API 키 설정 필요: `NAVER_CLIENT_ID`, `NAVER_CLIENT_SECRET`, `GOOGLE_API_KEY`, `GOOGLE_CSE_ID`, `YOUTUBE_API_KEY`
+
+### 뉴스 EC2 전송 (`sync-news-to-ec2.ts`)
+- 네이버 뉴스 검색 API로 10종 원자재 관련 뉴스 수집
+- Google Custom Search API로 최신 뉴스 보강
+- URL 기반 중복 제거 후 EC2 News API에 배치 전송
+- EC2 엔드포인트: `POST /api/internal/news/articles/batch`
+- 자동 publisher 추출 (조선일보, 한국경제, 연합뉴스 등 30개 매체)
+
+> 📌 EC2 주소는 `EC2_NEWS_API_URL` 환경변수 또는 기본값 `http://13.124.248.151` 사용
 
 ## 데이터 출처
 

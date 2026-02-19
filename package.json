@@ -7,7 +7,8 @@
     "start": "npx tsx bakery-cafe-price-dashboard.ts",
     "predict": "npx tsx bakery-cafe-price-prediction.ts",
     "validate": "npx tsx validate-prediction-model.ts",
-    "trend": "npx tsx bakery-ingredient-trend-report.ts"
+    "trend": "npx tsx bakery-ingredient-trend-report.ts",
+    "sync:news": "npx tsx sync-news-to-ec2.ts"
   },
   "devDependencies": {
     "typescript": "^5.9.3",
