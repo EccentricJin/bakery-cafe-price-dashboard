@@ -32,6 +32,9 @@ npx tsx bakery-cafe-price-prediction.ts
 
 # 예측 모델 검증 (2020-2025 6년 백테스트, 612건)
 npx tsx validate-prediction-model.ts
+
+# 원자재 트렌드 통합 리포트 (네이버+구글+YouTube API)
+npx tsx bakery-ingredient-trend-report.ts
 ```
 
 ## 포함 기능
@@ -83,6 +86,17 @@ npx tsx validate-prediction-model.ts
 | 바닐라 | 🟢3.2% | 🟡7.5% | 🟠15% | 🔴65% | 🟠18% | 🟠14% |
 
 > 📌 **주요 인사이트**: 평상시(안정기)에는 MAPE 3~8%로 우수하나, 구조적 충격(러-우 전쟁 2022, 코코아 공급위기 2024, 커피 서리피해 2021, 바닐라 폭락 2023) 기간에는 정확도 저하. 앱 서비스 적용 시 뉴스 기반 이상 탐지 보완 필요.
+
+### 트렌드 통합 리포트 (`bakery-ingredient-trend-report.ts`)
+- 3대 API를 활용한 실시간 원자재 트렌드 수집·분석
+  - **네이버 쇼핑 API**: 국내 실제 판매 가격 (최저/평균/중간값/최고, 판매처별)
+  - **Google Custom Search API**: 최근 뉴스·기사 트렌드 (가격 동향, 시장 이슈)
+  - **YouTube Data API v3**: 관련 영상 트렌드 (조회수, 인기 채널)
+- 원자재별 개별 상세 리포트 + 전체 요약 테이블
+- 사장님 인사이트 (가격 절약 기회, YouTube 인기도 순위)
+- 알림 서비스용 JSON 출력 (`--- TREND_JSON_START/END ---`)
+
+> 📌 `.env` 파일에 API 키 설정 필요: `NAVER_CLIENT_ID`, `NAVER_CLIENT_SECRET`, `GOOGLE_API_KEY`, `GOOGLE_CSE_ID`, `YOUTUBE_API_KEY`
 
 ## 데이터 출처
 
