@@ -38,6 +38,9 @@ npx tsx bakery-ingredient-trend-report.ts
 
 # 원자재 뉴스 수집 → EC2 서버 전송
 npx tsx sync-news-to-ec2.ts
+
+# 원자재 가격 수집 + 주간 변동률 → EC2 전송 (매일 실행)
+npx tsx sync-prices-to-ec2.ts
 ```
 
 ## 포함 기능
@@ -109,6 +112,15 @@ npx tsx sync-news-to-ec2.ts
 - 자동 publisher 추출 (조선일보, 한국경제, 연합뉴스 등 30개 매체)
 
 > 📌 EC2 주소는 `EC2_NEWS_API_URL` 환경변수 또는 기본값 `http://13.124.248.151` 사용
+
+### 가격 수집 & 주간 변동률 EC2 전송 (`sync-prices-to-ec2.ts`)
+- 네이버 쇼핑 API로 10종 원자재 실시간 가격 수집
+- **주간 변동률 계산**: `weekly_change = (current - week_ago) / week_ago * 100`
+- 알림 기준: 주간 **±5% 이상** → 급등/급락 알림 생성
+- 로컬 `price-history.json`에 일별 이력 저장 (90일 보관)
+- EC2 전송: Prices API 우선 시도 → 미구현 시 News API fallback
+- 대표 가격: 중간값 (median) 또는 하위 25% 평균 (계란 등)
+- 알림 서비스용 JSON 출력 (`--- PRICE_ALERT_JSON_START/END ---`)
 
 ## 데이터 출처
 
